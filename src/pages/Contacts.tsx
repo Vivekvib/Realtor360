@@ -99,6 +99,7 @@ export default function Contacts() {
           </div>
         </header>
 
+        <div className="ctable-wrap">
         <div className="ctable">
           <div className="ctable__row ctable__row--head">
             <span>Contact Name</span><span>Company</span><span>Role</span><span>Phone No.</span>
@@ -116,6 +117,7 @@ export default function Contacts() {
             </div>
           ))}
           {!visible.length && <p className="ctable__empty">No contacts match these filters.</p>}
+        </div>
         </div>
 
         <nav className="pager" aria-label="Pagination">

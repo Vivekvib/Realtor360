@@ -36,7 +36,7 @@
 .clist__head h1 { font-size: 30px; font-weight: 500; line-height: 36px; }
 .clist__bar { display: flex; align-items: center; justify-content: space-between; margin-top: 19px; }
 .btn-create { height: 36px; padding: 0 13px; border-radius: 6px; background: var(--gold); color: #fff; font-size: 20px; font-weight: 500; }
-.clist__tools { display: flex; align-items: center; gap: 12px; }
+.clist__tools { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
 .tsearch {
   display: flex; align-items: center; width: 333px; height: 39px; padding: 0 12px 0 13px;
   background: #e9ebee; border-radius: 8px; color: #1c1c1c;
@@ -47,7 +47,8 @@
 .tbtn--view { width: 67px; }
 .tbtn--actions { width: 99px; font-size: 17.5px; margin-left: 1px; }
 
-.ctable { margin-top: 27px; }
+.ctable-wrap { margin-top: 27px; overflow-x: auto; }
+.ctable { min-width: 1330px; }
 .ctable__row {
   display: grid; align-items: start; padding-top: 27px;
   grid-template-columns: 363px 162px 117px 187px 163px 185px minmax(130px, 1fr);
@@ -81,3 +82,22 @@
 .pager button:last-child { border-left: 1px solid #333; }
 .pager button:disabled { opacity: 0.45; cursor: default; }
 .pager .is-cur { background: #f6e7b0; border-radius: 50%; width: 34px; height: 34px; padding: 0; border: 0; margin: 0 4px; font-weight: 500; }
+
+/* ───────── responsive ───────── */
+@media (max-width: 1180px) {
+  .contacts { grid-template-columns: minmax(0, 1fr); }
+  .filters {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    column-gap: 24px; align-items: start; padding: 20px 24px 24px;
+  }
+  .filters h2 { grid-column: 1 / -1; text-align: left; padding: 0; margin-bottom: 4px; }
+  .fsearch { grid-column: 1 / -1; }
+  .btn-apply, .btn-reset { width: 100%; margin: 12px 0 0; }
+  .clist { padding: 0 20px; }
+  .clist__head { margin: 0 -20px; padding: 20px 20px 15px; }
+  .clist__bar { flex-wrap: wrap; gap: 12px; }
+  .tsearch { width: min(333px, 100%); }
+}
+@media (max-width: 560px) {
+  .clist__head h1, .filters h2 { font-size: 26px; }
+}

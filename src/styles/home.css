@@ -9,7 +9,6 @@
 .home__main {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  grid-template-rows: 126px 415px 245px 159px 349px;
   gap: 13px 19px;
 }
 .home__main > .card, .home__main > div { min-width: 0; }
@@ -21,6 +20,7 @@
 .c-closed { grid-column: 1 / 3; grid-row: 4; }
 .c-listing { grid-column: 1 / 4; grid-row: 5; }
 .c-leads { grid-column: 4; grid-row: 5; }
+.c-listing, .c-leads { min-height: 349px; }
 .home__side { display: flex; flex-direction: column; gap: 13px; }
 
 .card {
@@ -37,10 +37,10 @@
   color: #1b1b1b;
 }
 .chart .card__title { position: absolute; top: 14px; left: 28px; z-index: 1; }
-.chart svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; font-family: inherit; }
+.chart svg { display: block; width: 100%; height: auto; max-width: 780px; margin: 52px auto 0; font-family: inherit; }
 
 /* ───────── KPI ───────── */
-.kpi { padding: 13px 16px; }
+.kpi { padding: 13px 16px; height: 126px; }
 .kpi__head { display: flex; align-items: center; gap: 25px; height: 48px; }
 .kpi__head h3 { font-size: 22.7px; font-weight: 500; letter-spacing: -0.1px; }
 .kpi__icon {
@@ -76,7 +76,7 @@ th { font-weight: 500; text-align: left; }
 .pipeline__table th:last-child { border-radius: 0 8px 8px 0; }
 
 /* total closed */
-.closed { padding: 14px 26px 0; }
+.closed { padding: 14px 26px 0; min-height: 159px; }
 .closed .card__title { margin-left: 2px; }
 .closed__track {
   position: relative; height: 53px; margin-top: 11px;
@@ -98,7 +98,8 @@ th { font-weight: 500; text-align: left; }
 /* listing */
 .listing { padding: 14px 26px 0; }
 .listing .card__title { margin-left: 2px; }
-.listing__table { margin-top: 28px; table-layout: fixed; font-size: 17.5px; }
+.listing__scroll { margin-top: 28px; overflow-x: auto; padding-bottom: 8px; }
+.listing__table { min-width: 940px; table-layout: fixed; font-size: 17.5px; }
 .listing__table thead tr { background: #f6f7f9; }
 .listing__table th { height: 41px; padding: 0 13px; font-size: 17.5px; }
 .listing__table th:first-child { border-radius: 8px 0 0 8px; }
@@ -112,7 +113,7 @@ th { font-weight: 500; text-align: left; }
 .listing__table th:nth-child(5) { width: 191px; }
 .listing__table th:nth-child(6) { width: 96px; }
 .prop { display: flex; align-items: center; gap: 6px; font-size: 15px; font-weight: 500; line-height: 1.15; }
-.thumb { width: 38px; height: 38px; flex: none; border-radius: 6px; }
+.thumb { width: 38px; height: 38px; flex: none; border-radius: 6px; object-fit: cover; background: #eee; }
 .stack { display: flex; align-items: center; }
 .stack__more {
   display: grid; place-items: center; width: 30px; height: 30px; margin-left: -9px;
@@ -171,3 +172,38 @@ th { font-weight: 500; text-align: left; }
 .sched li { border-left: 3px solid var(--c); padding: 2px 4px 2px 9px; border-radius: 2px; min-height: 47px; }
 .sched li b { display: block; font-size: 17px; font-weight: 500; line-height: 22px; }
 .sched li p { font-size: 14.5px; color: #747474; line-height: 20px; }
+
+/* ───────── responsive ───────── */
+/* Below the design width the right rail drops under the main grid. */
+@media (max-width: 1699px) {
+  .home { grid-template-columns: minmax(0, 1fr); row-gap: 13px; }
+  .home__side { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 19px; align-items: start; }
+}
+/* Half-screen / tablet: two KPI columns, everything else full width. */
+@media (max-width: 1239px) {
+  .home__main { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .c-donut, .c-stage, .c-sales, .c-pipe, .c-closed, .c-listing, .c-leads { grid-column: 1 / -1; grid-row: auto; }
+  .c-listing, .c-leads { min-height: 0; }
+}
+@media (max-width: 860px) {
+  .home { padding: 16px 16px 32px; }
+  .home__side { grid-template-columns: minmax(0, 1fr); }
+  .reminder { min-height: 0; }
+}
+@media (max-width: 560px) {
+  .home__main { grid-template-columns: minmax(0, 1fr); }
+  .kpi__head h3 { font-size: 20px; }
+  .cal__head h2 { font-size: 30px; }
+}
+
+/* Tighter listing columns so Status stays visible on half-screen widths. */
+@media (max-width: 1239px) {
+  .listing__table { min-width: 780px; }
+  .listing__table th:nth-child(1) { width: 150px; }
+  .listing__table th:nth-child(2) { width: 100px; }
+  .listing__table th:nth-child(3) { width: 80px; }
+  .listing__table th:nth-child(4) { width: 100px; }
+  .listing__table th:nth-child(5) { width: 140px; }
+  .listing__table th:nth-child(6) { width: 70px; }
+  .listing__table th, .listing__table td { padding-left: 8px; padding-right: 8px; }
+}

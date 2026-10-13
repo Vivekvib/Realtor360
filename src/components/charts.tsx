@@ -46,7 +46,7 @@ export function DonutChart() {
   );
 
   return (
-    <svg viewBox="0 0 669 415" aria-label="Deals by lead source">
+    <svg viewBox="0 52 669 363" aria-label="Deals by lead source">
       <ArrowDefs />
       {LEAD_SOURCES.map((d, i) => {
         const a0 = (acc / sum) * 360 + START;
@@ -77,7 +77,7 @@ export function StageChart() {
   const y = (v: number) => yBase - v * perUnit;
 
   return (
-    <svg viewBox="0 0 668 415" aria-label="Deals by stage">
+    <svg viewBox="0 52 668 363" aria-label="Deals by stage">
       {ticks.map((t) => (
         <g key={t}>
           <line x1={x0} x2={x1} y1={y(t)} y2={y(t)} stroke={GRID} strokeWidth="1" />
@@ -139,7 +139,7 @@ export function SalesBars() {
   const rows = [{ y: 64 }, { y: 111 }];
 
   return (
-    <svg viewBox="0 0 669 245" aria-label="Deals by sales people">
+    <svg viewBox="0 52 669 193" aria-label="Deals by sales people">
       <line x1={x0} x2={x0} y1={58} y2={152} stroke={GRID} />
       <line x1={480} x2={480} y1={58} y2={152} stroke={GRID} />
       <line x1={620} x2={620} y1={58} y2={152} stroke={GRID} />

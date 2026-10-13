@@ -1,3 +1,4 @@
+import { PEOPLE } from "../data/photos";
 import Avatar from "./Avatar";
 import { CaretDown, Logo, SearchIcon } from "./Icons";
 import "../styles/navbar.css";
@@ -43,7 +44,7 @@ export default function Navbar({ active, onNavigate }: Props) {
           <SearchIcon />
         </label>
         <button className="nav__profile" aria-label="Profile">
-          <Avatar size={44} seed={0} />
+          <Avatar size={44} seed={0} src={PEOPLE.profile} alt="Profile" />
           <CaretDown />
         </button>
       </div>

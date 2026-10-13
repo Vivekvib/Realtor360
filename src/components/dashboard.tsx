@@ -1,11 +1,12 @@
 import { useState } from "react";
+import { PEOPLE } from "../data/photos";
 import Avatar from "./Avatar";
 import {
   ArrowDownRight, ArrowUpRight, ChevronLeft, ChevronRight,
   CoinsIcon, HandshakeIcon, HomeIcon, LeadIcon, PhoneIcon,
 } from "./Icons";
 import {
-  CAL_MARKS, KPIS, LEAD_CONTACTS, LISTINGS, PIPELINE, REMINDERS, SCHEDULE,
+  CAL_MARKS, FACES, KPIS, LEAD_CONTACTS, LISTINGS, PIPELINE, REMINDERS, SCHEDULE,
   type Kpi, type Listing,
 } from "../data/dashboard";
 
@@ -75,8 +76,12 @@ const TONES = [
   ["#2d5fa8", "#9cc0ea", "#16335f"],
 ];
 
-function Thumb({ tone }: { tone: number }) {
+function Thumb({ tone, src, alt }: { tone: number; src: string; alt: string }) {
+  const [failed, setFailed] = useState(false);
   const [a, b, c] = TONES[tone];
+  if (!failed) {
+    return <img className="thumb" src={src} alt={alt} loading="lazy" onError={() => setFailed(true)} />;
+  }
   return (
     <svg className="thumb" viewBox="0 0 38 38" aria-hidden>
       <rect width="38" height="38" rx="6" fill={b} />
@@ -96,7 +101,7 @@ function ListingRow({ l }: { l: Listing }) {
     <tr>
       <td>
         <div className="prop">
-          <Thumb tone={l.tone} />
+          <Thumb tone={l.tone} src={l.photo} alt={l.name.join(" ")} />
           <span>{l.name[0]}<br />{l.name[1]}</span>
         </div>
       </td>
@@ -105,8 +110,8 @@ function ListingRow({ l }: { l: Listing }) {
       <td>{l.price}</td>
       <td>
         <div className="stack">
-          <Avatar size={30} seed={3} ring />
-          <Avatar size={30} seed={1} ring style={{ marginLeft: -9 }} />
+          <Avatar size={30} seed={3} src={PEOPLE.john} ring />
+          <Avatar size={30} seed={1} src={PEOPLE.jessica} ring style={{ marginLeft: -9 }} />
           <span className="stack__more">{l.leads[2]}</span>
         </div>
       </td>
@@ -120,6 +125,7 @@ export function ActiveListing() {
   return (
     <section className="card listing">
       <h2 className="card__title">Active Listing</h2>
+      <div className="listing__scroll">
       <table className="listing__table">
         <thead>
           <tr>
@@ -129,6 +135,7 @@ export function ActiveListing() {
         </thead>
         <tbody>{LISTINGS.map((l) => <ListingRow key={l.name[0]} l={l} />)}</tbody>
       </table>
+      </div>
     </section>
   );
 }
@@ -144,7 +151,7 @@ export function LeadsContacts() {
       <ul>
         {LEAD_CONTACTS.map((c) => (
           <li key={c.name}>
-            <Avatar size={44} seed={c.seed} />
+            <Avatar size={44} seed={c.seed} src={c.photo} alt={c.name} />
             <div>
               <b>{c.name}</b>
               <small>{c.city}</small>
@@ -167,7 +174,7 @@ export function Reminder() {
         <p>15 leads need to be followed up.</p>
         <div className="reminder__faces">
           {[0, 1, 2, 3].map((i) => (
-            <Avatar key={i} size={26} seed={i + 1} ring style={{ marginLeft: i ? -9 : 0 }} />
+            <Avatar key={i} size={26} seed={i + 1} src={FACES[i]} ring style={{ marginLeft: i ? -9 : 0 }} />
           ))}
           <span className="reminder__plus">+11</span>
         </div>

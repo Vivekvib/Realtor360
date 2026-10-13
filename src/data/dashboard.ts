@@ -49,7 +49,10 @@ export const PIPELINE = [
   { name: "Angel Garden", count: 1 },
 ];
 
+import { PEOPLE, PROPERTIES } from "./photos";
+
 export interface Listing {
+  photo: string;
   name: [string, string];
   type: string;
   units: string;
@@ -61,19 +64,21 @@ export interface Listing {
   tone: number;
 }
 export const LISTINGS: Listing[] = [
-  { name: ["Maplewood", "House"], type: "House", units: "12", price: "Rs.85L", leads: [0, 1, "+35"], views: "125", status: "available", statusLabel: "8/12 Occupied", tone: 0 },
-  { name: ["Serenity", "Villa"], type: "Villa", units: "9300", price: "Rs.2.8Cr", leads: [0, 1, "+40"], views: "930", status: "available", statusLabel: "Available", tone: 1 },
-  { name: ["Rosehill", "Cottage"], type: "House", units: "25", price: "Rs.1.1Cr", leads: [0, 1, "+15"], views: "355", status: "available", statusLabel: "Available", tone: 2 },
-  { name: ["Skyline", "Edge"], type: "Apartment", units: "17", price: "Rs.75L", leads: [0, 1, "+11"], views: "425", status: "sold", statusLabel: "Sold Out", tone: 3 },
+  { photo: PROPERTIES.maplewood, name: ["Maplewood", "House"], type: "House", units: "12", price: "Rs.85L", leads: [0, 1, "+35"], views: "125", status: "available", statusLabel: "8/12 Occupied", tone: 0 },
+  { photo: PROPERTIES.serenity, name: ["Serenity", "Villa"], type: "Villa", units: "9300", price: "Rs.2.8Cr", leads: [0, 1, "+40"], views: "930", status: "available", statusLabel: "Available", tone: 1 },
+  { photo: PROPERTIES.rosehill, name: ["Rosehill", "Cottage"], type: "House", units: "25", price: "Rs.1.1Cr", leads: [0, 1, "+15"], views: "355", status: "available", statusLabel: "Available", tone: 2 },
+  { photo: PROPERTIES.skyline, name: ["Skyline", "Edge"], type: "Apartment", units: "17", price: "Rs.75L", leads: [0, 1, "+11"], views: "425", status: "sold", statusLabel: "Sold Out", tone: 3 },
 ];
 
 export const LEAD_CONTACTS = [
-  { name: "John Doe", city: "New York", seed: 3 },
-  { name: "Jessica Chen", city: "California, LA", seed: 1 },
-  { name: "Evan Chris", city: "New York", seed: 4 },
-  { name: "Jack B.", city: "Ohio, Columbus", seed: 5 },
-  { name: "Emily Paris", city: "California, LA", seed: 2 },
+  { name: "John Doe", city: "New York", seed: 3, photo: PEOPLE.john },
+  { name: "Jessica Chen", city: "California, LA", seed: 1, photo: PEOPLE.jessica },
+  { name: "Evan Chris", city: "New York", seed: 4, photo: PEOPLE.evan },
+  { name: "Jack B.", city: "Ohio, Columbus", seed: 5, photo: PEOPLE.jack },
+  { name: "Emily Paris", city: "California, LA", seed: 2, photo: PEOPLE.emily },
 ];
+
+export const FACES = [PEOPLE.john, PEOPLE.jessica, PEOPLE.evan, PEOPLE.a];
 
 export const REMINDERS = [
   { title: "Submit Final Offer- Villa Deal", body: "Finalize and send offer documents." },
